@@ -8,14 +8,6 @@ This ASL is compatible with RotN versions 1.03(Steam), 1.05(GOG), Oldest GOG(Fit
 [LiveSplit] Layout Settings: Scriptable AutoSplitter -> Browse for this .asl file (^^^)
 [LiveSplit] Remember to save your Layout/Splits!
 */
-/* Waste of time/effort...
-- I have a better saving address that handles all saving instances very well, but can't get a pointer for it, so I can't add it. CE can't find the paths.
-- CircleLogoScreen only works for me evidently, and there's no alternative addresses for it, it might work with AOB, which is not pretty.
-- Probably needs a new loading flag that handles all loading instances, but it apparently doesn't exist.
-- I've spent more time on CE shit than playing the game(90+h) and all I've got is dead ends, repeatedly crashing or freezing game mid-searches, stupid-huge CE searches killing my SSD, bullshit flags the game bends the rules for, no time to play this or anything else, no testers. Never got confirmation that any of the GOG offsets worked, or most things in general.
-- Can't be used in current state, can't be used anytime soon, no point using it later, because then people would have to retime old runs and manually remove load times, which nobody wants to do or should do, or retime runs where the load remover may fuck up.
-- It's not worth the stress, it's dull and frustrating, nothing fucking cooperates, and there's nothing to gain from this.
-- Just uncomment if you want to keep wasting your time.
 
 state("BloodstainedRotN-Win64-Shipping", "GOG Oldest")
 {
@@ -88,7 +80,7 @@ startup {
 	settings.Add("Pause during general gameplay loading", true);
 	settings.Add("Pause during Save File Loading", true);
 	settings.Add("Pause while Saving", true);
-	settings.Add("Pause during RotN Circle Logo screen(Not working for others)", false);
+	//settings.Add("Pause during RotN Circle Logo screen(Not working for others)", false);
 	settings.Add("Pause on Press-Any-Key events (BANNED in runs)", false);
 	settings.Add("Pause while game is inactive (BANNED in runs)", false);
 	settings.Add("End splits on final hit(unavailable)", false);
@@ -138,9 +130,9 @@ isLoading
 	else if (settings["Pause while Saving"] && current.Saving == 1){
 		return true;
 	}
-	else if (settings["Pause during RotN Circle Logo screen(Not working for others)"] && current.CircleLogoScreen == 0){
+	/*else if (settings["Pause during RotN Circle Logo screen(Not working for others)"] && current.CircleLogoScreen == 0){
 		return true;
-	}
+	}*/
 	else if (settings["Pause on Press-Any-Key events (BANNED in runs)"] && current.PressAnyKey == 1){
 		return true;
 	}
@@ -167,4 +159,3 @@ reset
 	|| (timer.CurrentPhase == TimerPhase.Running && old.GameMode == 2 && current.GameMode == 0)
 	;
 }
-*/
