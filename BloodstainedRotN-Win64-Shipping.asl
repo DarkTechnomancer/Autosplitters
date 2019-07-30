@@ -22,6 +22,7 @@ state("BloodstainedRotN-Win64-Shipping", "GOG Oldest")
 	byte Difficulty : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x26C;
 	byte GameMode : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x26D;
 	byte Character : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x26E;
+	byte PauseMenu : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x880;
 	float IGT : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x268;
 	uint NGPlusCount : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x264;
 	uint GameClear : "BloodstainedRotN-Win64-Shipping.exe", 0x06C31250, 0x258;
@@ -119,6 +120,16 @@ init
 	else{
 		version = "Steam 1.03"; //Whatever most common version is
 	}
+	var LogoIgnoreFlag = false;
+}
+
+update
+{
+	if (old.GameMode == 0 && current.GameMode != 0) {
+		vars.LogoIgnoreFlag = true;
+	} else if (current.RoomData != 0) {
+		vars.LogoIgnoreFlag = false;
+	}
 }
  
 isLoading
@@ -134,7 +145,7 @@ isLoading
 	else if (settings["Pause while Saving"] && current.Saving == 1){
 		return true;
 	}
-	else if (settings["Pause during RotN Circle Logo screen (Being tested)"] && current.RoomData == 0 && current.GameMode != 0){
+	else if (settings["Pause during RotN Circle Logo screen (Being tested)"] && current.RoomData == 0 && current.GameMode != 0 && !vars.LogoIgnoreFlag){
 		return true;
 	}
 	else if (settings["Pause on Press-Any-Key events (BANNED in runs)"] && current.PressAnyKey == 1){
