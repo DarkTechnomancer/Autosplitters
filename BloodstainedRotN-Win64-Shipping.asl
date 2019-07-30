@@ -79,16 +79,16 @@ state("BloodstainedRotN-Win64-Shipping", "Steam 1.03")
 	uint RoomData : "BloodstainedRotN-Win64-Shipping.exe", 0x06C30250, 0x2f688;
 }
 
-startup {
+startup
+{
 	settings.Add("Pause during general gameplay loading", true);
 	settings.Add("Pause during Save File Loading", true);
 	settings.Add("Pause while Saving", true);
-	settings.Add("Automatically start timer", true);
-	settings.Add("Pause during RotN Circle Logo screen(Experimental)", false);
+	settings.Add("Pause during RotN Circle Logo screen (Being tested)", false);
 	settings.Add("Pause on Press-Any-Key events (BANNED in runs)", false);
 	settings.Add("Pause while game is inactive (BANNED in runs)", false);
-	//settings.Add("End splits on final hit(unavailable)", false);
-	//settings.Add("Split on any boss death(unavailable)", false);
+	settings.Add("End splits on final hit(unavailable)", false);
+	settings.Add("Split on any boss death(unavailable)", false);
 }
 
 init
@@ -134,7 +134,7 @@ isLoading
 	else if (settings["Pause while Saving"] && current.Saving == 1){
 		return true;
 	}
-	else if (settings["Pause during RotN Circle Logo screen(Experimental)"] && current.RoomData == 0 && current.GameMode != 0){
+	else if (settings["Pause during RotN Circle Logo screen (Being tested)"] && current.RoomData == 0 && current.GameMode != 0){
 		return true;
 	}
 	else if (settings["Pause on Press-Any-Key events (BANNED in runs)"] && current.PressAnyKey == 1){
@@ -150,12 +150,10 @@ isLoading
 
 start
 {
-	if (settings["Automatically start timer"] {
-		return (current.GameMode == 6 && current.Room == 708 && old.PressAnyKey == 1 && current.PressAnyKey == 0 && old.IGT == 0 && current.Character == 0)
-			|| (current.GameMode == 1 && current.Room == 708 && old.DialogueShop == 1 && current.DialogueShop == 0 && current.Character == 0)
-			|| (current.GameMode == 2 && current.Room >= 184259 && current.Room <= 184260 && old.FileCreateLoad == 1 && current.FileCreateLoad == 0 && current.Character == 0)
-		;
-	}
+	return (current.GameMode == 6 && current.Room == 708 && old.PressAnyKey == 1 && current.PressAnyKey == 0 && old.IGT == 0 && current.Character == 0)
+		|| (current.GameMode == 1 && current.Room == 708 && old.DialogueShop == 1 && current.DialogueShop == 0 && current.Character == 0)
+		|| (current.GameMode == 2 && current.Room >= 184259 && current.Room <= 184260 && old.FileCreateLoad == 1 && current.FileCreateLoad == 0 && current.Character == 0)
+	;
 }
 
 reset
