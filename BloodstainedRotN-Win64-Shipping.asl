@@ -161,7 +161,7 @@ isLoading
 
 start
 {
-	return (current.GameMode == 6 && current.Room == 708 && old.PressAnyKey == 1 && current.PressAnyKey == 0 && current.IGT != old.IGT && current.Character == 0)
+	return (current.GameMode == 6 && current.Room == 708 && old.PressAnyKey == 1 && current.PressAnyKey == 0 && current.Character == 0)
 		|| (current.GameMode == 1 && current.Room == 708 && old.DialogueShop == 1 && current.DialogueShop == 0 && current.Character == 0)
 		|| (current.GameMode == 2 && current.Room >= 184259 && current.Room <= 184260 && old.FileCreateLoad == 1 && current.FileCreateLoad == 0 && current.Character == 0)
 	;
@@ -169,8 +169,8 @@ start
 
 reset
 {
-	return (timer.CurrentPhase == TimerPhase.Running && current.GameMode == 6 && current.Room == 708 && current.DialogueShop == 1 && current.IGT == 0 && current.Character == 0)
+	return (timer.CurrentPhase == TimerPhase.Running && current.GameMode == 6 && current.Room == 708 && current.DialogueShop == 1 && current.IntroEvents == 0 && current.Character == 0)
 		|| (timer.CurrentPhase == TimerPhase.Running && current.GameMode == 1 && current.Room == 708 && current.DialogueShop == 1 && current.IntroEvents == 0 && current.Character == 0)
-		|| (timer.CurrentPhase == TimerPhase.Running && old.GameMode == 2 && current.GameMode == 0)
+		|| (timer.CurrentPhase == TimerPhase.Running && current.GameMode == 2 && current.Room >= 184259 && current.Room <= 184260 && current.FileCreateLoad == 1)
 	;
 }
